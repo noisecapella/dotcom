@@ -7,7 +7,6 @@ export default function($ = window.jQuery) {
     const veil = document.querySelector(".m-menu__cover");
     const header = document.querySelector("header.header");
     const menu = document.querySelector(".m-menu__content");
-    const accordions = document.querySelectorAll("accordion-heading");
 
     const scrollToTop = () => {
       window.setTimeout(() => {
@@ -39,6 +38,7 @@ export default function($ = window.jQuery) {
         $(htmlElement).removeClass('modal-open');
         scrollToTop();
       }
+<<<<<<< HEAD
     })
     
 
@@ -54,9 +54,11 @@ export default function($ = window.jQuery) {
           panel.style.display = "block";
         }
       })
+=======
+>>>>>>> 75d39e92 (First pass of mobile menu (without tests))
     })
   }
-    
+  
   document.addEventListener(
     "turbolinks:load",
     () => window.nextTick(setupMobileMenu),
