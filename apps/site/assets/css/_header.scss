@@ -159,6 +159,12 @@
     // setting the width keeps the rendered logo proportional,
     // while adding space above and below inside the svg.
     width: $base-spacing * 12;
+
+    @include media-breakpoint-down(md) {
+      g {
+        fill: $white;
+      }
+    }
   }
 }
 
@@ -191,10 +197,6 @@
   font-size: $font-size-base-sm;
   padding: 0;
   text-align: right;
-
-  @include media-breakpoint-only(md) {
-    font-size: $font-size-base;
-  }
 
   @include media-breakpoint-up(lg) {
     display: none;
@@ -264,6 +266,10 @@ nav.m-menu {
   position: absolute;
   z-index: $z-index-modal;
 }
+.m-menu__toggle::after {
+  background-color: $brand-primary-darkest;
+  content: "Menu"
+}
 .m-menu__cover {
   background-color: rgba($black, .15);
   height: 100%;
@@ -276,7 +282,6 @@ nav.m-menu {
 .m-menu__content,
 .m-menu__search {
   width: 0px;
-  white-space: nowrap;
   transition: width .25s ease;
   overflow-y: auto;
   z-index: 1;
@@ -288,10 +293,6 @@ nav.m-menu {
   }
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-
-  @include media-breakpoint-up(lg) {
-    display: none;
-  }
 }
 .m-menu__content {
   bottom: 0
@@ -318,6 +319,9 @@ header.header.menu-open {
   }
   .header-search__toggle {
     display: none;
+  }
+  .m-menu__toggle::after {
+    content: "Close"
   }
 }
 
