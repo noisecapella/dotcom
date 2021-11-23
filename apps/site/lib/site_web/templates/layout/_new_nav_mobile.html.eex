@@ -9,7 +9,7 @@
           <!-- 'accordion' class marks the intended pass-of-focus from the menu button to the navbar, though divs don't have focus... -->
           <!-- Todo: so when accordions are updated, also update mobile-menu.js -->
           <nav aria-labelledby="accordion-heading">
-            <div id="accordion-heading" class="heading-4 accordion" style="color:white;"><%= sub_menu_section %></div>
+            <div id="accordion-heading" class="acc-container"><%= sub_menu_section %></div>
             <%= if Map.has_key?(sub_menu, :links) do %>
               <div style="background:#e2ecf9;">
                 <%= for {link_name, href, link_host} <- Map.get(sub_menu, :links) do %>

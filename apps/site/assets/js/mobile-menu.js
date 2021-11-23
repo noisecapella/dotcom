@@ -7,6 +7,7 @@ export default function($ = window.jQuery) {
     const veil = document.querySelector(".m-menu__cover");
     const header = document.querySelector("header.header");
     const menu = document.querySelector(".m-menu__content");
+    const accordions = document.querySelectorAll("accordion-heading");
 
     const scrollToTop = () => {
       window.setTimeout(() => {
@@ -39,8 +40,23 @@ export default function($ = window.jQuery) {
         scrollToTop();
       }
     })
+    
+
+    // Accordion click opens
+    accordions.forEach(function(accordion) {
+      accordion.addEventListener("click", () => {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        console.log(panel.id);
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      })
+    })
   }
-  
+    
   document.addEventListener(
     "turbolinks:load",
     () => window.nextTick(setupMobileMenu),
