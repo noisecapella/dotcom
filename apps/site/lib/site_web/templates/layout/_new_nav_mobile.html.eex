@@ -4,6 +4,19 @@
   <div class="m-menu__content">
     <%= for %{menu_section: menu_section, sub_menus: sub_menus} <- nav_link_content_redesign(@conn) do %>
       <nav aria-labelledby="section-heading">
+
+
+      <%# Loop through headings and submenus %>
+      <%= Site.React.render("Accordion", %{
+        id: "accordion-heading",
+        title: %{
+          collapsed: "",
+          expanded: ""
+      }}) %>
+
+
+
+
         <div id="section-heading" class="font-small" style="color:white;"><%= menu_section %></div>
         <%= for %{sub_menu_section: sub_menu_section} = sub_menu <- sub_menus do %>
           <!-- 'accordion' class marks the intended pass-of-focus from the menu button to the navbar, though divs don't have focus... -->
