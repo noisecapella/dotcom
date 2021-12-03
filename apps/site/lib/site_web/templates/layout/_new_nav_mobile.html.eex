@@ -29,17 +29,20 @@
                   Map.merge(assigns, %{
                     multiselectable: false,
                     parent_view: SiteWeb.CMS.ParagraphView,
-                    sections: safe_to_string(
-                      [
-                        for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
-                          icon = if link_host === :external_link, do: fa("external-link"), else: "";
+                    sections:
+                      %{
+                        content_template: safe_to_string(
                           [
-                            content_tag(:span, svg(icon)),
-                            content_tag(:a, href, do: [content_tag(:div, link_name ), icon])
+                            for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
+                              icon = if link_host === :external_link, do: "external-link.svg", else: "";
+                              [
+                                content_tag(:span, svg(icon)),
+                                content_tag(:a, href, do: [content_tag(:div, link_name ), icon])
+                              ]
+                            end
                           ]
-                        end
-                      ]
-                    )
+                        )
+                      }
                   })) %>
               </div>
             <% end %>
