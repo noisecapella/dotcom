@@ -1,3 +1,6 @@
+<%
+  import Phoenix.HTML, only: [safe_to_string: 1, html_escape: 1]
+ %>
 <nav class="m-menu" id="navmenu">
   <div class="m-menu__cover"></div>
   <!-- Todo: Remove styles in favor of classes -->
@@ -36,10 +39,11 @@
                             for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
                               icon = if link_host === :external_link, do: fa("external-link"), else: ""
                               [
-                                 safe_to_string([
-                                  content_tag(:span, svg(icon)),
-                                  content_tag(:a, href, [content_tag(:div, link_name ), icon])
-                                 ])
+                                html_escape(
+                                 [
+                                  content_tag(:span, svg("icon-crowding.svg")),
+                                  content_tag(:a, href, [content_tag(:div, link_name ), svg("icon-crowding.svg")])
+                                 ]) |> safe_to_string
                               ]
                             end
                           ]
