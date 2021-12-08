@@ -31,17 +31,19 @@
                     parent_view: SiteWeb.CMS.ParagraphView,
                     sections:
                       %{
-                        content_template: safe_to_string(
+                        content_template:
                           [
                             for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
-                              icon = if link_host === :external_link, do: "external-link.svg", else: "";
+                              icon = if link_host === :external_link, do: fa("external-link"), else: ""
                               [
-                                content_tag(:span, svg(icon)),
-                                content_tag(:a, href, do: [content_tag(:div, link_name ), icon])
+                                 safe_to_string([
+                                  content_tag(:span, svg(icon)),
+                                  content_tag(:a, href, [content_tag(:div, link_name ), icon])
+                                 ])
                               ]
                             end
                           ]
-                        )
+
                       }
                   })) %>
               </div>
