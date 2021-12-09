@@ -34,23 +34,22 @@
                     parent_view: SiteWeb.CMS.ParagraphView,
                     sections:
                       %{
-                        content_template:
-                          [
-                            for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
+                        content:
+                          Map.get(sub_menu, :links) |> Enum.map(fn {link_name, href, link_host} ->
                               icon = if link_host === :external_link, do: fa("external-link"), else: ""
 
-                                html_escape(
                                  [
                                   content_tag(:span, icon),
                                   content_tag(:a, [content_tag(:div, link_name ), content_tag(:span, icon)], href: href)
 
 
-                                 ]) |> safe_to_string
+                                 ]
+                           end),
+                          title: "yert",
+                          prefix: "skadoo"
+                      },
 
-                            end
-                          ]
 
-                      }
                   })) %>
               </div>
             <% end %>
