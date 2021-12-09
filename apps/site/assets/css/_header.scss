@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'typography';
 
 .desktop-menu-nav {
   float: right;
@@ -244,8 +245,7 @@
   line-height: $headings-line-height;
 }
 
-nav.m-menu, .m-menu__toggle,
-.header-navbar .search {
+nav.m-menu, .m-menu__toggle {
   @include media-breakpoint-up(lg) {
     display: none;
   }
@@ -253,6 +253,9 @@ nav.m-menu, .m-menu__toggle,
 .header-navbar {
   .search {
     @include media-breakpoint-only(xs) {
+      display: none;
+    }
+    @include media-breakpoint-up(lg) {
       display: none;
     }
   }
@@ -266,10 +269,6 @@ nav.m-menu {
   position: absolute;
   z-index: $z-index-modal;
 }
-.m-menu__toggle::after {
-  background-color: $brand-primary-darkest;
-  content: "Menu"
-}
 .m-menu__cover {
   background-color: rgba($black, .15);
   height: 100%;
@@ -282,10 +281,12 @@ nav.m-menu {
 .m-menu__content,
 .m-menu__search {
   width: 0px;
-  transition: width .25s ease;
+  visibility: hidden;
+  white-space: nowrap;
+  transition: all .25s ease;
   overflow-y: auto;
   z-index: 1;
-  background-color: $brand-primary-darkest;
+  background-color: $brand-primary;
   position: fixed;
   top: $header-navbar-height;
   &::-webkit-scrollbar {
@@ -293,9 +294,112 @@ nav.m-menu {
   }
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
 }
+
+@mixin dark-mode-links {
+  color: $brand-primary-light-contrast;
+  &:hover, &:focus {
+    color: $brand-primary-light;
+  }
+  &:active {
+    color: $brand-primary;
+  }
+}
+
+@mixin light-mode-links {
+  color: $brand-primary;
+  &:active {
+    color: $brand-primary-darkest;
+  }
+}
+
 .m-menu__content {
-  bottom: 0
+  bottom: 0;
+
+  .menu-container {
+    background-color: $brand-primary-darkest;
+    padding: $space-3_new 0 $space-3_new $space-3_new;
+    width: 280px;
+    border-radius: 0 $space-2_new $space-2_new 0;
+    font-size: 14px;
+
+    // Description list
+    dl {
+      overflow: auto;
+    }
+    dt, dd {
+      width: 50%;
+    }
+    dt {
+      float: left;
+      font-weight: normal;
+    }
+    dd {
+      float: right;
+      margin-bottom: none;
+      text-align: right;
+    }
+    
+    &_header {
+      font-size: 12px;
+      padding-bottom: $base-spacing__new;
+    }
+    &_row {
+      display: flex;
+      justify-content: space-between;
+      padding: $space-2_new $space-4_new $space-2_new 0;
+      border-bottom: 1px solid $brand-primary;
+      &:last-child {
+        border-bottom: unset;
+      }
+    }
+    &_phone {
+      padding-top: $space-3_new;
+      > a {
+        font-weight: 500;
+        @include media-breakpoint-down(md) {
+          @include dark-mode-links();
+        }
+        @include media-breakpoint-up(lg) {
+          @include light-mode-links();
+        }
+      }
+    }
+    &_smaller-font {
+      font-size: 12px;
+      line-height: 21px;
+    }
+    
+    @include media-breakpoint-up(sm) {
+      border-radius: 0 $space-2_new $space-2_new;
+    }
+    @include media-breakpoint-up(lg) {
+      background-color: $brand-primary-lightest;
+      color: $gray-dark;
+      &_header {
+        color: $gray;
+      }
+      &_row {
+        border-color: $gray-lighter;
+      }
+    }
+
+    // CSS for the Contact Numbers split-container
+    &.top-half {
+      margin-bottom: 2px;
+      border-radius: 0 $space-2_new 0 0;
+    }
+    &.bottom-half {
+      border-radius: 0 0 $space-2_new;
+      @include media-breakpoint-up(sm) {
+        border-radius: 0 0 $space-2_new $space-2_new;
+      }
+    }
+  }
 }
 .m-menu__search {
   bottom: auto;
@@ -309,9 +413,16 @@ header.header.menu-open {
     display: unset;
   }
   .m-menu__content {
-    width: 220px;
+    visibility: unset;
+    width: auto;
     @include media-breakpoint-only(xs) {
       width: 100%;
+    }
+    @include media-breakpoint-only(sm) {
+      width: 360px;
+    }
+    @include media-breakpoint-only(md) {
+      width: 384px;
     }
   }
   .search {
@@ -320,9 +431,6 @@ header.header.menu-open {
   .header-search__toggle {
     display: none;
   }
-  .m-menu__toggle::after {
-    content: "Close"
-  }
 }
 
 header.header.search-open {
@@ -330,6 +438,7 @@ header.header.search-open {
     display: unset;
   }
   .m-menu__search {
+    visibility: unset;
     width: 100%;
   }
   .m-menu__toggle {

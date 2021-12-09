@@ -47,11 +47,16 @@ defmodule SiteWeb.LayoutView do
       {"More", "About Us, Business Center, Projects...", static_page_path(conn, :about)}
     ]
 
+<<<<<<< HEAD
   def nav_link_content_redesign(conn),
     do: [
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+  def nav_link_content_redesign(_conn),
+    do: [
+>>>>>>> origin
       %{
         menu_section: "Transit",
         sub_menus: [
@@ -148,7 +153,11 @@ defmodule SiteWeb.LayoutView do
                :internal_link}
             ]
           },
+<<<<<<< HEAD
           # special 
+=======
+          # special
+>>>>>>> origin
           %{sub_menu_section: "Contact numbers"}
         ]
       },
@@ -195,6 +204,7 @@ defmodule SiteWeb.LayoutView do
           }
         ]
       }
+<<<<<<< HEAD
 =======
 >>>>>>> 75d39e92 (First pass of mobile menu (without tests))
       %{menu_section: "Transit", sub_menus: [
@@ -297,5 +307,7 @@ defmodule SiteWeb.LayoutView do
 =======
 >>>>>>> 7d52a4d5 (First pass of mobile menu (without tests))
 >>>>>>> 75d39e92 (First pass of mobile menu (without tests))
+=======
+>>>>>>> origin
     ]
 end
