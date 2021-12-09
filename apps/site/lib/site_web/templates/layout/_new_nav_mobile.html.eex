@@ -1,25 +1,9 @@
-<%
-  import Phoenix.HTML, only: [safe_to_string: 1, html_escape: 1]
- %>
 <nav class="m-menu" id="navmenu">
   <div class="m-menu__cover"></div>
   <!-- Todo: Remove styles in favor of classes -->
   <div class="m-menu__content">
     <%= for %{menu_section: menu_section, sub_menus: sub_menus} <- nav_link_content_redesign(@conn) do %>
       <nav aria-labelledby="section-heading">
-
-
-      <%# Loop through headings and submenus %>
-      <%= Site.React.render("Accordion", %{
-        id: "accordion-heading",
-        title: %{
-          collapsed: "",
-          expanded: ""
-      }}) %>
-
-
-
-
         <div id="section-heading" class="font-small" style="color:white;"><%= menu_section %></div>
         <%= for %{sub_menu_section: sub_menu_section} = sub_menu <- sub_menus do %>
           <!-- 'accordion' class marks the intended pass-of-focus from the menu button to the navbar, though divs don't have focus... -->
@@ -31,23 +15,20 @@
                 <%= SiteWeb.PartialView.render("_accordion_ui.html",
                   Map.merge(assigns, %{
                     multiselectable: false,
-                    parent_view: SiteWeb.CMS.ParagraphView,
                     sections:
-                      %{
+                      [%{
                         content:
                           Map.get(sub_menu, :links) |> Enum.map(fn {link_name, href, link_host} ->
                               icon = if link_host === :external_link, do: fa("external-link"), else: ""
 
-                                 [
-                                  content_tag(:span, icon),
-                                  content_tag(:a, [content_tag(:div, link_name ), content_tag(:span, icon)], href: href)
-
-
-                                 ]
+                              [
+                                content_tag(:span, icon),
+                                content_tag(:a, [content_tag(:div, link_name ), content_tag(:span, icon)], href: href)
+                              ]
                            end),
-                          title: "yert",
-                          prefix: "skadoo"
-                      },
+                          title: sub_menu_section,
+                          prefix: String.replace(sub_menu_section, " ", "-")
+                      }]
 
 
                   })) %>
