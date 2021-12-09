@@ -38,13 +38,15 @@
                           [
                             for {link_name, href, link_host} <- Map.get(sub_menu, :links) do
                               icon = if link_host === :external_link, do: fa("external-link"), else: ""
-                              [
+
                                 html_escape(
                                  [
-                                  content_tag(:span, svg("icon-crowding.svg")),
-                                  content_tag(:a, href, [content_tag(:div, link_name ), svg("icon-crowding.svg")])
+                                  content_tag(:span, icon),
+                                  content_tag(:a, [content_tag(:div, link_name ), content_tag(:span, icon)], href: href)
+
+
                                  ]) |> safe_to_string
-                              ]
+
                             end
                           ]
 
