@@ -21,58 +21,6 @@ export default function mobileMenu($ = window.jQuery) {
       window.setTimeout(() => {
         menu.scrollTop = 0;
       }, 200);
-<<<<<<< HEAD
-    }
-
-    menuButton.addEventListener("click", () => {
-      $(header).toggleClass('menu-open');
-      $(htmlElement).toggleClass('modal-open');
-      scrollToTop();
-    });
-    searchButton.addEventListener("click", () => {
-      $(header).toggleClass('search-open');
-      $(htmlElement).toggleClass('modal-open');
-    });
-
-    veil.addEventListener("click", () => {
-      $(header).removeClass('menu-open');
-      $(header).removeClass('search-open');
-      $(htmlElement).removeClass('modal-open');
-      scrollToTop();
-    })
-
-    document.body.addEventListener("keydown", (e) => {
-      if (e.key == 'Escape') {
-        $(header).removeClass('menu-open');
-        $(header).removeClass('search-open');
-        $(htmlElement).removeClass('modal-open');
-        scrollToTop();
-      }
-<<<<<<< HEAD
-    })
-    
-
-    // Accordion click opens
-    accordions.forEach(function(accordion) {
-      accordion.addEventListener("click", () => {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        console.log(panel.id);
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      })
-=======
->>>>>>> 75d39e92 (First pass of mobile menu (without tests))
-    })
-  }
-  
-  document.addEventListener(
-    "turbolinks:load",
-    () => window.nextTick(setupMobileMenu),
-=======
     };
 
     const closeMenus = () => {
@@ -137,7 +85,6 @@ export default function mobileMenu($ = window.jQuery) {
         setupMobileMenu($);
       }
     },
->>>>>>> origin
     { passive: true }
   );
 }
