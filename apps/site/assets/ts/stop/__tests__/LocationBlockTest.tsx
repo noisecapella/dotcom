@@ -17,7 +17,6 @@ it("renders", () => {
       <LocationBlock
         routes={data.routes}
         stop={data.stop}
-        encoder={window.encodeURIComponent}
         streetViewUrl={null}
       />
     )
@@ -26,32 +25,15 @@ it("renders", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("uses lat/lng when window.encodeURIComponent isn't available", () => {
-  expect(data.stop.address).toEqual("700 Atlantic Ave, Boston, MA 02110");
+it("uses lat/lng when linking to the trip planner", () => {
   expect(data.stop.latitude).toEqual(42.352271);
   expect(data.stop.longitude).toEqual(-71.055242);
-  const encodedAddress = window.encodeURIComponent(data.stop.address!);
   const latLng = `${data.stop.latitude},${data.stop.longitude}`;
-  expect(
-    shallow(
-      <LocationBlock
-        routes={[]}
-        stop={data.stop}
-        encoder={window.encodeURIComponent}
-        streetViewUrl={null}
-      />
-    )
-      .find(".btn.btn-primary")
-      .prop("href")
-  ).toEqual(
-    `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`
-  );
-
   expect(
     shallow(<LocationBlock routes={[]} stop={data.stop} streetViewUrl={null} />)
       .find(".btn.btn-primary")
       .prop("href")
-  ).toEqual(`https://www.google.com/maps/dir/?api=1&destination=${latLng}`);
+  ).toEqual(`/trip-planner/to/${latLng}`);
 });
 
 it("falls back to municipality if stop has no address", () => {
