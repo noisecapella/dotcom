@@ -43,10 +43,10 @@ export default function mobileMenu($ = window.jQuery) {
       menuButton.setAttribute("aria-expanded", !expanded);
       menuButton.innerHTML = expanded ? "Menu" : "Close";
       // Pass focus
-      if (!expanded) {
-        const firstAccordion = document.querySelector(".accordion");
-        firstAccordion.focus();
-      }
+      // if (!expanded) {
+      //   const firstAccordion = document.querySelector(".accordion");
+      //   firstAccordion.focus();
+      // }
       scrollToTop();
     });
     searchButton.addEventListener("click", () => {
@@ -72,6 +72,11 @@ export default function mobileMenu($ = window.jQuery) {
     // Esc key closes
     document.body.addEventListener("keydown", e => {
       handleNativeEscapeKeyPress(e, closeMenus);
+    });
+
+    // Changing viewport size closes
+    window.addEventListener('resize', () => {
+      closeMenus();
     });
   }
 
