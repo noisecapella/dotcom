@@ -280,8 +280,8 @@ defmodule SiteWeb.ScheduleController.LineController do
     end
   end
 
-  defp bus_description(%{id: route_number} = route) do
-    "MBTA #{bus_type(route)} route #{route_number} stops and schedules, including maps, real-time updates, " <>
+  defp bus_description(%{id: route_number, name: route_name} = route) do
+    "MBTA #{bus_type(route)} route #{route_name} stops and schedules, including maps, real-time updates, " <>
       "parking and accessibility information, and connections."
   end
 
